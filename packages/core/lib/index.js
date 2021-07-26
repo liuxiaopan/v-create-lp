@@ -63,7 +63,6 @@ function checkDebugArgs() {
     if (args.debug) {
         log.changeLevel('verbose')
     }
-    log.verbose('args-----', args.debug)
 }
 
 
