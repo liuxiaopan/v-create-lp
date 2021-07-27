@@ -1,6 +1,6 @@
 {
   "name": "@v-create-lp/core",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "> TODO: description",
   "author": "liupan <liupan@zuoshouyisheng.com>",
   "homepage": "",
@@ -20,8 +20,8 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@v-create-lp/log": "file:../utils/log",
     "@v-create-lp/get-npm-info": "file:../utils/get-npm-info",
+    "@v-create-lp/log": "file:../utils/log",
     "colors": "^1.4.0",
     "dotenv": "^10.0.0",
     "import-local": "^3.0.2",
