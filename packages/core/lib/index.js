@@ -12,11 +12,11 @@ const dotenv = require('dotenv')
 const pkg = require('../package.json')
 const log = require('@v-create-lp/log')
 const { LOWEST_NODE_VERSION } = require('./contant')
-const {getNpmInfo} = require('@v-create-lp/get-npm-info')
+const { getPublishVersions } = require('@v-create-lp/get-npm-info')
 
 module.exports = core;
 
-function core() {
+async function core() {
     // TODO
     try{
         getVersion()
@@ -25,7 +25,7 @@ function core() {
         checkUserHome()
         checkDebugArgs()
         checkEnv()
-        checkGlobalUpdate()
+        await checkGlobalUpdate()
     } catch (e) {
         log.error(e.message)
     }
@@ -75,9 +75,10 @@ function checkEnv() {
 }
 
 
-function checkGlobalUpdate() {
+async function checkGlobalUpdate() {
     const {name, version} = pkg
 
-    getNpmInfo(name, version)
+    const info = await getPublishVersions(name, version)
+    console.log('info--', info)
 
 }

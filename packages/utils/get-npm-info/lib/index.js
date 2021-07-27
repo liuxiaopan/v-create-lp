@@ -5,19 +5,30 @@ const semver = require("semver");
 const urlJoin = require("url-join")
 
 module.exports = {
-    getNpmInfo
+    getNpmInfo,
+    getPublishVersions
 };
 
 function getNpmInfo(name, registry) {
     if(!name) {
         return null
     }
-    
-    const registryUrl = registry || urlJoin(getRegistry(), name)
-    
+    const registryUrl = urlJoin(getRegistry(registry || 'taobao'), name)
     return axios.get(registryUrl).then(res => {
-        console.log(res)
-    })
+        if (res.status == 200) {
+            return res.data
+        }
+        return null
+    }).catch(error => Promise.reject(error))
+}
+
+async function getPublishVersions(name, registry) {
+    const data = await getNpmInfo(name, registry)
+    if (data) {
+        return Object.keys(data.versions)
+    } else {
+        return []
+    }
 }
 
 function getRegistry (isOrigin) {
