@@ -12,7 +12,7 @@ const dotenv = require('dotenv')
 const pkg = require('../package.json')
 const log = require('@v-create-lp/log')
 const { LOWEST_NODE_VERSION } = require('./contant')
-const { getPublishVersions } = require('@v-create-lp/get-npm-info')
+const { getUpdatableVersions } = require('@v-create-lp/get-npm-info')
 
 module.exports = core;
 
@@ -78,7 +78,7 @@ function checkEnv() {
 async function checkGlobalUpdate() {
     const {name, version} = pkg
 
-    const info = await getPublishVersions(name, version)
+    const info = await getUpdatableVersions(name, version)
     console.log('info--', info)
 
 }

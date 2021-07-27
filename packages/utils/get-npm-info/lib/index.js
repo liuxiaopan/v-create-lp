@@ -2,11 +2,13 @@
 
 const  axios = require("axios");
 const semver = require("semver");
-const urlJoin = require("url-join")
+const urlJoin = require("url-join");
+const colors = require('colors')
 
 module.exports = {
     getNpmInfo,
-    getPublishVersions
+    getPublishVersions,
+    getUpdatableVersions
 };
 
 function getNpmInfo(name, registry) {
@@ -25,8 +27,20 @@ function getNpmInfo(name, registry) {
 async function getPublishVersions(name, registry) {
     const data = await getNpmInfo(name, registry)
     if (data) {
-        return Object.keys(data.versions)
+        return Object.keys(data.versions).sort((a, b) => semver.gt(b, a) ? 1: -1)
     } else {
+        return []
+    }
+}
+
+async function getUpdatableVersions(name, currentVersion, registry) {
+    const data = await getPublishVersions(name, registry)
+    if (!currentVersion) {
+        throw new Error(colors.red('请输入当前版本')) 
+    }
+    if (data.length) {
+        return data.filter(value => semver.satisfies(value, `^${currentVersion}`))
+    }else {
         return []
     }
 }
