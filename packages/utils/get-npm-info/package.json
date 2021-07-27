@@ -1,11 +1,11 @@
 {
-  "name": "@v-create-lp/utils",
+  "name": "@v-create-lp/get-npm-info",
   "version": "0.0.4",
   "description": "> TODO: description",
   "author": "liupan <liupan@zuoshouyisheng.com>",
-  "homepage": "",
+  "homepage": "https://github.com/liuxiaopan/v-create-lp#readme",
   "license": "ISC",
-  "main": "util/index.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -16,14 +16,14 @@
   "publishConfig": {
     "access": "public"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuxiaopan/v-create-lp.git"
+  },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "dependencies": {
-    "axios": "^0.21.1",
-    "npmlog": "^5.0.0",
-    "semver": "^7.3.5",
-    "url-join": "^4.0.1"
-  },
-  "gitHead": "af920f7f397457bed2bf075a0ee27da7d28936d9"
+  "bugs": {
+    "url": "https://github.com/liuxiaopan/v-create-lp/issues"
+  }
 }

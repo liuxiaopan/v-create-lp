@@ -12,6 +12,7 @@ const dotenv = require('dotenv')
 const pkg = require('../package.json')
 const log = require('@v-create-lp/log')
 const { LOWEST_NODE_VERSION } = require('./contant')
+const {getNpmInfo} = require('@v-create-lp/get-npm-info')
 
 module.exports = core;
 
@@ -23,7 +24,8 @@ function core() {
         checkRoot()
         checkUserHome()
         checkDebugArgs()
-        checkEnv();
+        checkEnv()
+        checkGlobalUpdate()
     } catch (e) {
         log.error(e.message)
     }
@@ -69,5 +71,13 @@ function checkDebugArgs() {
 function checkEnv() {
     const config = dotenv.config()
     log.info('环境变量', config)
+
+}
+
+
+function checkGlobalUpdate() {
+    const {name, version} = pkg
+
+    getNpmInfo(name, version)
 
 }
