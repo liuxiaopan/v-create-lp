@@ -39,7 +39,7 @@ async function getUpdatableVersions(name, currentVersion, registry) {
         throw new Error(colors.red('请输入当前版本')) 
     }
     if (data.length) {
-        return data.filter(value => semver.satisfies(value, `^${currentVersion}`))
+        return data.filter(value => semver.gt(value, currentVersion))
     }else {
         return []
     }

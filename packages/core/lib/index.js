@@ -78,7 +78,9 @@ function checkEnv() {
 async function checkGlobalUpdate() {
     const {name, version} = pkg
 
-    const info = await getUpdatableVersions(name, version)
-    console.log('info--', info)
+    const updatableVersions = await getUpdatableVersions(name, version)
+    if (updatableVersions && updatableVersions.length) {
+        log.warn('模块可更新', `当前版本号是${colors.yellow(version)}, 可更新至最新版本${colors.green(updatableVersions[0])}`)
+    }
 
 }
