@@ -7,12 +7,17 @@ const pathExists = require('path-exists').sync
 const colors = require('colors')
 const minimist = require('minimist')
 const dotenv = require('dotenv')
+const commander = require('commander')
+
 
 
 const pkg = require('../package.json')
 const log = require('@v-create-lp/log')
+const init = require('@v-create-lp/init')
 const { LOWEST_NODE_VERSION } = require('./contant')
 const { getUpdatableVersions } = require('@v-create-lp/get-npm-info')
+const program = new commander.Command()
+
 
 module.exports = core;
 
@@ -23,9 +28,10 @@ async function core() {
         checkNodeVersion()
         checkRoot()
         checkUserHome()
-        checkDebugArgs()
+        // checkDebugArgs()
         checkEnv()
         await checkGlobalUpdate()
+        registerCommand()
     } catch (e) {
         log.error(e.message)
     }
@@ -33,7 +39,6 @@ async function core() {
 }
 
 function getVersion() {
-    console.log('pkg', pkg.version)
     log.success('version', pkg.version)
 }
 
@@ -81,6 +86,47 @@ async function checkGlobalUpdate() {
     const updatableVersions = await getUpdatableVersions(name, version)
     if (updatableVersions && updatableVersions.length) {
         log.warn('模块可更新', `当前版本号是${colors.yellow(version)}, 可更新至最新版本${colors.green(updatableVersions[0])}`)
+    } else{
+        log.success('已是最新版本')
     }
 
+}
+
+
+
+function registerCommand() {
+    const options = program.opts();
+    program
+        .name(Object.keys(pkg.bin)[0])
+        .usage('<command> [options]')
+        .version(pkg.version)
+        .option('-d, --debug', 'output extra debugging')
+    
+    program.on('option:debug', function(e) {
+        if (options.debug) {
+            process.env.LOG_LEVEL ='verbose'
+        } else {
+            process.env.LOG_LEVEL ='info'
+        }
+        log.level = process.env.LOG_LEVEL;
+    } )
+    program.on('command:*', function(obj) {
+        const registerCommands = program.commands.map(cmd => cmd.name())
+        log.error('unknown command:', obj[0]);
+
+        log.success('all register commands: ', registerCommands)
+    })
+
+
+    program
+        .command('init [projectName]')
+        .option('-f, --force', 'is force to init project')
+        .action(init)
+
+
+
+    if (process.argv && process.argv.length < 3) {
+        return program.outputHelp()
+    }
+    program.parse(process.argv)
 }

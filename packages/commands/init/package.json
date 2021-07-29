@@ -1,11 +1,11 @@
 {
-  "name": "@v-create-lp/models",
+  "name": "@v-create-lp/init",
   "version": "0.0.8",
   "description": "> TODO: description",
   "author": "liupan <liupan@zuoshouyisheng.com>",
-  "homepage": "",
+  "homepage": "https://github.com/liuxiaopan/v-create-lp#readme",
   "license": "ISC",
-  "main": "lib/models.js",
+  "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -13,14 +13,14 @@
   "files": [
     "lib"
   ],
-  "publishConfig": {
-    "access": "public"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liuxiaopan/v-create-lp.git"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "gitHead": "af920f7f397457bed2bf075a0ee27da7d28936d9",
-  "dependencies": {
-    "commander": "^8.1.0"
+  "bugs": {
+    "url": "https://github.com/liuxiaopan/v-create-lp/issues"
   }
 }
