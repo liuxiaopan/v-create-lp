@@ -1,6 +1,6 @@
 {
   "name": "@v-create-lp/core",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "> TODO: description",
   "author": "liupan <liupan@zuoshouyisheng.com>",
   "homepage": "",
@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@v-create-lp/get-npm-info": "file:../utils/get-npm-info",
-    "@v-create-lp/log": "file:../utils/log",
     "@v-create-lp/init": "file:../commands/init",
+    "@v-create-lp/log": "file:../utils/log",
     "colors": "^1.4.0",
     "commander": "^8.1.0",
     "dotenv": "^10.0.0",
